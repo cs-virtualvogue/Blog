@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+	async
+	defer
+ ></script>
     
     <style>
         * {
@@ -284,6 +290,8 @@
                     <label class="form-label" for="message">ข้อความรายละเอียด</label>
                     <textarea id="message" name="message" class="form-control" placeholder="พิมพ์ข้อความของคุณที่นี่..." required></textarea>
                 </div>
+
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAEPXVaiFC0qhqwdM"></div>
 
                 <!-- Submit Button -->
                 <button type="submit" id="submitBtn" class="btn-submit">
