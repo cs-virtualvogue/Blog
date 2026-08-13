@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - ติดต่อเรา</title>
+    <!-- โหลดฟอนต์ Prompt จาก Google Fonts ให้สวยเหมือนในแบบ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f1f5f9;
+        }
+
+        /* Header Section */
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        /* Business Inquiries Section */
+        .inquiry-box {
+            border-left: 4px solid #3b82f6;
+            padding-left: 14px;
+            margin-bottom: 28px;
+        }
+
+        .inquiry-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .inquiry-email {
+            font-size: 14px;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .inquiry-email strong {
+            color: #0f172a;
+        }
+
+        .inquiry-email a {
+            color: #334155;
+            text-decoration: none;
+        }
+
+        .inquiry-note {
+            font-size: 13px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* Form Container Box */
+        .form-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #1e293b;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-control:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2064748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #1a202c;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background-color: #2d3748;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .btn-submit:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* Alert Status Message */
+        .status-message {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+            text-align: center;
+        }
+
+        .status-message.success {
+            display: block;
+            background-color: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .status-message.error {
+            display: block;
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ffffff;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 18px;
+            }
+            .form-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Main Title Section -->
+        <h1 class="header-title">Contact Us - ติดต่อเรา</h1>
+        <p class="header-subtitle">
+            มีข้อสงสัย แนะนำติชม หรือสนใจร่วมงานกับเรา สามารถส่งข้อความผ่านฟอร์มด้านล่าง หรือติดต่อทีมงานโดยตรงผ่านช่องทางเหล่านี้ได้เลยค่ะ
+        </p>
+
+        <!-- Business Inquiries Box -->
+        <div class="inquiry-box">
+            <div class="inquiry-title">BUSINESS INQUIRIES</div>
+            <div class="inquiry-email">
+                <span>📧</span>
+                <strong>Email:</strong> 
+                <a href="mailto:contact@virtualvogue.biz">contact@virtualvogue.biz</a>
+            </div>
+            <div class="inquiry-note">*ทางทีมงานจะติดต่อกลับภายใน 24-48 ชั่วโมงทำการ</div>
+        </div>
+
+        <!-- Form Box -->
+        <div class="form-card">
+            <form id="contactForm">
+                <!-- Field 1: Name -->
+                <div class="form-group">
+                    <label class="form-label" for="name">ชื่อของคุณ</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="กรอกชื่อของคุณ" required>
+                </div>
+
+                <!-- Field 2: Email -->
+                <div class="form-group">
+                    <label class="form-label" for="email">อีเมลติดต่อ</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+                </div>
+
+                <!-- Field 3: Subject -->
+                <div class="form-group">
+                    <label class="form-label" for="subject">หัวข้อการติดต่อ</label>
+                    <select id="subject" name="subject" class="form-control" required>
+                        <option value="" disabled selected>-- เลือกหัวข้อการติดต่อ --</option>
+                        <option value="สอบถามข้อมูลทั่วไป">สอบถามข้อมูลทั่วไป</option>
+                        <option value="สนใจร่วมงาน / พันธมิตรทางธุรกิจ">สนใจร่วมงาน / พันธมิตรทางธุรกิจ</option>
+                        <option value="แจ้งปัญหาการใช้งาน">แจ้งปัญหาการใช้งาน</option>
+                        <option value="ข้อเสนอแนะ / อื่นๆ">ข้อเสนอแนะ / อื่นๆ</option>
+                    </select>
+                </div>
+
+                <!-- Field 4: Message -->
+                <div class="form-group">
+                    <label class="form-label" for="message">ข้อความรายละเอียด</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="พิมพ์ข้อความของคุณที่นี่..." required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    <span id="btnText">ส่งข้อความ</span>
+                </button>
+
+                <!-- Status Alert Box -->
+                <div id="statusMessage" class="status-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ วาง Web App URL ที่ก๊อปปี้มาจาก Apps Script ในขั้นตอนที่ 2 ตรงนี้ได้เลยครับ
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXd1JbH3Z5T3yQ27ZhhbxfeGU7hCIw2tOzt7DDhRw_IvGGsMItnAonW_cyzn_5g1aG/exec";
+
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // เปลี่ยนปุ่มเป็นสถานะกำลังส่ง
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> กำลังส่งข้อความ...';
+            statusMessage.className = 'status-message';
+            statusMessage.style.display = 'none';
+
+            // ดึงข้อมูลจากฟอร์ม
+            const formData = new FormData(form);
+
+            // ส่งข้อมูลไปยัง Google Apps Script
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    statusMessage.textContent = 'ส่งข้อความสำเร็จ! ทางทีมงานจะรีบติดต่อกลับโดยเร็วที่สุด';
+                    statusMessage.className = 'status-message success';
+                    form.reset(); // ล้างฟอร์มเมื่อส่งสำเร็จ
+                } else {
+                    throw new Error(data.error || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusMessage.textContent = 'เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง';
+                statusMessage.className = 'status-message error';
+            })
+            .finally(() => {
+                // คืนค่าปุ่มส่งข้อความให้กดได้ใหม่
+                submitBtn.disabled = false;
+                btnText.textContent = 'ส่งข้อความ';
+            });
+        });
+    </script>
+</body>
+</html>
